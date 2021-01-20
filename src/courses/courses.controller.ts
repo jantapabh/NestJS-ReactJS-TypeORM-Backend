@@ -7,17 +7,17 @@ import { CreateCourseDto } from './dto/create-course.dto';
 // เป็นคลาสที่ให้บริการ resource ต่าง ๆ
 @Controller('courses')
 export class CoursesController {
+
     constructor(private coursesService: CoursesService) {}
 
     @Get()
      async findAll() : Promise<Course[]> {
-         
          return this.coursesService.findAll();
      }
 
      @Post()
      async create(@Body() createCourseDto : CreateCourseDto){
-         if((createCourseDto.number != undefined) && (createCourseDto.title != undefined)){
+         if((createCourseDto.number !== undefined) && (createCourseDto.title != undefined)){
          const newCourse = this.coursesService.create(createCourseDto);
          return newCourse;
      }  else

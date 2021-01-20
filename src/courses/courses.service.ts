@@ -14,6 +14,8 @@ export class CoursesService {
     return this.courseRepository.find();
   }
 
+//สร้าง service create เอาไว้สำหรับสรา้ง course ใหม่
+
   async create(createCourseDto: CreateCourseDto) {
     return this.courseRepository.save(createCourseDto);
   }
