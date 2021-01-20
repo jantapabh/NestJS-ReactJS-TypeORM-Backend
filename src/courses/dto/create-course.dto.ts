@@ -1,6 +1,6 @@
 export class CreateCourseDto {
 
-    number: number;
+    number: string;
     title: string;
     
 }

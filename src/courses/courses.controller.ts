@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Post } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import Course from './course.entity'
 import { CreateCourseDto } from './dto/create-course.dto';
@@ -11,14 +11,21 @@ export class CoursesController {
 
     @Get()
      async findAll() : Promise<Course[]> {
+         
          return this.coursesService.findAll();
      }
 
      @Post()
      async create(@Body() createCourseDto : CreateCourseDto){
-         const course = this.coursesService.create(createCourseDto);
-     } 
- 
+         if((createCourseDto.number != undefined) && (createCourseDto.title != undefined)){
+         const newCourse = this.coursesService.create(createCourseDto);
+         return newCourse;
+     }  else
+     {
+       throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+     }
+    }
+   
 }
 
 

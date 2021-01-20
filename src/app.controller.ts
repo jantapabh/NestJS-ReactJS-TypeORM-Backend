@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
-// เป็นคลาสที่ให้บริการ resource ต่าง ๆ 
+// เป็นคลาสที่ให้บริการ resource ต่าง ๆ
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
