@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { CoursesService } from './courses.service';
-import Course from './entities/course.entity'
+import Course from './course.entity'
 
 
 // เป็นคลาสที่ให้บริการ resource ต่าง ๆ

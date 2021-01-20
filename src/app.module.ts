@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CoursesController } from './courses.controller';
-import { CoursesService } from './courses.service';
+import { CoursesController } from './courses/courses.controller';
+import { CoursesService } from './courses/courses.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import Course from './entities/course.entity';
+import Course from './courses/course.entity';
+import { CoursesModule } from './courses/courses.module';
 
 
 //บอกว่า  module หลักมี controller อะไรบ้างและมี service  อะไรบ้าง
@@ -18,10 +19,10 @@ import Course from './entities/course.entity';
       entities: [Course],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Course])
 
+    CoursesModule,
   ],
-  controllers: [AppController, CoursesController],
-  providers: [AppService, CoursesService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
