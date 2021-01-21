@@ -27,15 +27,8 @@ export class CoursesController {
 
   @Post()
   async create(@Body() createCourseDto: CreateCourseDto) {
-    if (
-      createCourseDto.number !== undefined &&
-      createCourseDto.title != undefined
-    ) {
       const newCourse = this.coursesService.create(createCourseDto);
       return newCourse;
-    } else {
-      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-    }
   }
 
   @Get(':courseId/reviews')
@@ -47,7 +40,7 @@ export class CoursesController {
 
   @Post(':courseId/reviews')
   async createReview(
-    @Param('courseId') courseId: ObjectID,
+    @Param('courseId', PaseObjectIdPipe) courseId: ObjectID,
     @Body() createReviewDto: CreateReviewDto,
   ) {
     if (
