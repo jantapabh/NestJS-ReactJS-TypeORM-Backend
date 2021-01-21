@@ -13,6 +13,7 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import Review from './review.entity';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { ObjectID } from 'mongodb';
+import {PaseObjectIdPipe} from '../common/pipes'
 
 // เป็นคลาสที่ให้บริการ resource ต่าง ๆ
 @Controller('courses')
@@ -38,20 +39,22 @@ export class CoursesController {
   }
 
   @Get(':courseId/reviews')
-  async findAllReviews(@Param('courseId') courseId: string): Promise<Review[]> {
+  async findAllReviews(
+    @Param('courseId', PaseObjectIdPipe) courseId: ObjectID,
+  ): Promise<Review[]> {
     return this.coursesService.findAllReviews(courseId);
   }
 
   @Post(':courseId/reviews')
   async createReview(
-    @Param('courseId') courseId: string,
+    @Param('courseId') courseId: ObjectID,
     @Body() createReviewDto: CreateReviewDto,
   ) {
     if (
       createReviewDto.comment !== undefined &&
       createReviewDto.score != undefined
     ) {
-      createReviewDto.courseId = new ObjectID(courseId);
+      createReviewDto.courseId = courseId;
       const newReview = this.coursesService.createReview(createReviewDto);
       return newReview;
     } else {
