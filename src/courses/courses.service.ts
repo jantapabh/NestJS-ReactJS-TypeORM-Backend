@@ -26,7 +26,7 @@ export class CoursesService {
 
   async findAllReviews(courseId: string): Promise<Review[]>{
 
-   return this.reviewRepository.find();
+   return this.reviewRepository.find({ where: {courseId: courseId}});
 
   }
 
