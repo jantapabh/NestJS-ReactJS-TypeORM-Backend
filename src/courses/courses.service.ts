@@ -3,13 +3,17 @@ import Course from './course.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateCourseDto } from './dto/create-course.dto';
+import Review from './review.entity';
 
 @Injectable()
 export class CoursesService {
+ 
   constructor(
-    @InjectRepository(Course) private courseRepository: Repository<Course>
-  ) {}
+    @InjectRepository(Course) private courseRepository: Repository<Course>,
+    @InjectRepository(Review) private reviewRepository: Repository<Review>
 
+  ) {}
+  
   async findAll(): Promise<Course[]> {
     return this.courseRepository.find();
   }
@@ -19,4 +23,12 @@ export class CoursesService {
   async create(createCourseDto: CreateCourseDto) {
     return this.courseRepository.save(createCourseDto);
   }
+
+  async findAllReviews(courseId: string): Promise<Review[]>{
+
+   return this.reviewRepository.find();
+
+  }
+
+ 
 }
