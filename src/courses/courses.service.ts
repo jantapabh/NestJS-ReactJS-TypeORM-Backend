@@ -27,15 +27,13 @@ export class CoursesService {
   }
 
   async findAllReviews(courseId: string): Promise<Review[]>{
-   return this.reviewRepository.find({ where: {courseId: courseId}});
+   return this.reviewRepository.find({ where: {courseId: new ObjectID(courseId)}});
   }
 
   //สร้าง service create Review
 
   async createReview(createReviewDto: CreateReviewDto) {
-    let newReview: any = { ...createReviewDto}
-    newReview.courseId = new ObjectID(createReviewDto.courseId);
-    return this.courseRepository.save(newReview);
+    return this.reviewRepository.save(createReviewDto);
 
   }
 }
