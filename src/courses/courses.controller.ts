@@ -41,17 +41,10 @@ export class CoursesController {
   @Post(':courseId/reviews')
   async createReview(
     @Param('courseId', PaseObjectIdPipe) courseId: ObjectID,
-    @Body() createReviewDto: CreateReviewDto,
-  ) {
-    if (
-      createReviewDto.comment !== undefined &&
-      createReviewDto.score != undefined
-    ) {
+    @Body() createReviewDto: CreateReviewDto,) 
+    {
       createReviewDto.courseId = courseId;
       const newReview = this.coursesService.createReview(createReviewDto);
       return newReview;
-    } else {
-      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-    }
   }
 }
