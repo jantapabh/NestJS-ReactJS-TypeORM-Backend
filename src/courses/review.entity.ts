@@ -1,5 +1,5 @@
 import { Entity, Column, ObjectIdColumn } from 'typeorm';
-import { ObjectId, ObjectID } from 'mongodb'
+import { ObjectID } from 'mongodb'
 
 @Entity()
 export class Review {
@@ -14,7 +14,7 @@ export class Review {
      score: number;
 
      @Column()
-    courseId: ObjectId;
+    courseId: ObjectID;
 
 }
 
