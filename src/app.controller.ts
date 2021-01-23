@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Request } from '@nestjs/common';
+import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { AppService } from './app.service';
+import { LocalAuthGuard } from './auth/local-auth-guard';
 
 // เป็นคลาสที่ให้บริการ resource ต่าง ๆ
 @Controller()
@@ -11,6 +13,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req){
     return req.user;
