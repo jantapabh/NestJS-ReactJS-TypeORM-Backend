@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import Course from './course.entity';
@@ -14,6 +15,7 @@ import Review from './review.entity';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { ObjectID } from 'mongodb';
 import {PaseObjectIdPipe} from '../common/pipes'
+import { JwtAuthGuard } from 'src/auth/jwt-auth-guard';
 
 // เป็นคลาสที่ให้บริการ resource ต่าง ๆ
 @Controller('courses')
@@ -25,6 +27,7 @@ export class CoursesController {
     return this.coursesService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createCourseDto: CreateCourseDto) {
       const newCourse = this.coursesService.create(createCourseDto);

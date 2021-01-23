@@ -6,7 +6,8 @@ import { UsersService } from 'src/users/users.service';
 export class AuthService {
     constructor(private usersService: UsersService,
         private jwtService: JwtService){}
-    
+
+        //ส่วนการตรวจสอบ username
 
     async validateUser(username: string, pass: string): Promise<any>{
         const user = await this.usersService.findOne(username)
