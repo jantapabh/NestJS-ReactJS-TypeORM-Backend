@@ -6,6 +6,10 @@ import { CoursesService } from './courses/courses.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import Course from './courses/course.entity';
 import { CoursesModule } from './courses/courses.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersService } from './users/users.service';
+import { UsersController } from './users/users.controller';
+import { UsersModule } from './users/users.module';
 import Review from './courses/review.entity';
 
 
@@ -22,8 +26,12 @@ import Review from './courses/review.entity';
     }),
 
     CoursesModule,
+
+    AuthModule,
+
+    UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, UsersController],
+  providers: [AppService, UsersService],
 })
 export class AppModule {}
