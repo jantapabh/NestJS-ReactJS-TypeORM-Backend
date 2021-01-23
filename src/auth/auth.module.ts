@@ -18,7 +18,8 @@ import { jwtConstants } from './contants';
     }
   )],
   providers: [AuthService, LocalStrategy],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
 

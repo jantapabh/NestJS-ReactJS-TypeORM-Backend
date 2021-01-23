@@ -7,13 +7,7 @@ import { LocalAuthGuard } from './auth/local-auth-guard';
 // เป็นคลาสที่ให้บริการ resource ต่าง ๆ
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService,
-    private authService: AuthService) {}
-
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+  constructor(private authService: AuthService) {}
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
